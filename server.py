@@ -39,8 +39,7 @@ print (" [+] Configuring server routes...")
 ##########
 
 ## PAGES AND RESOURCES
-
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST', 'HEAD'])
 def login():
     # Log out previous session
     session.pop('USERID', default=None)
@@ -54,10 +53,11 @@ def login():
         print("[LOGIN] USERID:", request.form['USERID'])
         print("[LOGIN] GAMEVERSION:", request.form['GAMEVERSION'])
         return redirect("/play.html")
-    # Login page
-    if request.method == 'GET':
-        saves_info = all_saves_info()
-        return render_template("login.html", saves_info=saves_info, version=version_name)
+    # Login page (GET or HEAD)
+    saves_info = all_saves_info()
+    if request.method == 'HEAD':
+        return '', 200
+    return render_template("login.html", saves_info=saves_info, version=version_name)
 
 @app.route("/play.html")
 def play():
