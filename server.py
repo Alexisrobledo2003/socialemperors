@@ -27,8 +27,8 @@ from constants import Constant
 from quests import get_quest_map
 from bundle import ASSETS_DIR, STUB_DIR, TEMPLATES_DIR, BASE_DIR
 
-host = '127.0.0.1'
-port = 5050
+host = '0.0.0.0'
+port = int(os.environ.get('PORT', 5050))
 
 app = Flask(__name__, template_folder=TEMPLATES_DIR)
 
@@ -302,8 +302,6 @@ def get_continent_ranking_response():
 
 print (" [+] Running server...")
 
-host = '0.0.0.0'
-port = int(os.environ.get('PORT', 5050))
 
 if __name__ == '__main__':
     app.secret_key = 'SECRET_KEY'
