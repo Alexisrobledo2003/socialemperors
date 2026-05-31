@@ -27,9 +27,9 @@ from constants import Constant
 from quests import get_quest_map
 from bundle import ASSETS_DIR, STUB_DIR, TEMPLATES_DIR, BASE_DIR
 
+import os
 host = '0.0.0.0'
 port = int(os.environ.get('PORT', 5050))
-
 app = Flask(__name__, template_folder=TEMPLATES_DIR)
 
 print (" [+] Configuring server routes...")
